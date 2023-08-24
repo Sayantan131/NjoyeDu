@@ -106,7 +106,7 @@ body {
 }
 
 .first-left > h1 {
-  font-size: 5.5rem;
+  font-size: 4.5rem;
   line-height: 4.5rem;
 }
 
@@ -116,7 +116,7 @@ body {
 }
 
 .first-left > button{
-  padding: 9px 20px;
+  padding: 9px 40px;
   border-radius: 20px;
   font-size: 18px;
   outline: none;
