@@ -8,6 +8,7 @@ html,
 body {
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 .nav {
@@ -15,6 +16,9 @@ body {
   width: 100vw;
   box-shadow: 0 0 10px 0 gray;
   display: flex;
+  position: fixed;
+  z-index: 999;
+  background-color: rgb(182, 182, 254);
 }
 
 .nav>.left {
@@ -93,6 +97,7 @@ body {
   width: 100vw;
   display: flex;
   padding-top: 4rem;
+  gap: 12rem;
 }
 
 .first-left {
@@ -115,7 +120,7 @@ body {
   font-size: 22px;
 }
 
-.first-left>button {
+.first-left > button{
   padding: 9px 40px;
   border-radius: 20px;
   font-size: 18px;
@@ -127,12 +132,25 @@ body {
 
 .first-right {
   height: 70%;
-  width: 50%;
+  width: 26.5%;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
   margin-top: 2.5rem;
+  border-radius: 50%;
+  background-color: rgb(165, 165, 252);
+  overflow: hidden;
+  border: 15px solid blue;
+}
+.first-right img {
+  height: 25rem;
+  transition: all ease 1s;
+}
+
+.first-right img:hover {
+  cursor: pointer;
+  scale: 1.2;
 }
 
 
@@ -147,8 +165,8 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-
-}
+  
+  }
 
 .collaborate {
   height: 100%;
@@ -172,15 +190,16 @@ body {
   height: 70%;
   width: 100%;
   display: flex;
+  gap: 10px;
   align-items: center;
   justify-content: center;
   text-align: center;
-
+  /* background-color: aqua; */
 }
 
 .collaborate .img img {
   height: 7rem;
-  width: 10rem;
+  width: 7.8rem;
 }
 
 .collaborate .img img #google {
