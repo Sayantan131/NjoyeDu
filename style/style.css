@@ -21,7 +21,7 @@ body {
   background-color: rgb(182, 182, 254);
 }
 
-.nav > .left {
+.nav>.left {
   height: 100%;
   width: 30%;
   display: flex;
@@ -30,12 +30,12 @@ body {
   gap: 5rem;
 }
 
-.nav > .left > img {
+.nav>.left>img {
   height: 55%;
   width: 12.3rem;
 }
 
-.nav > .left > button {
+.nav>.left>button {
   padding: 9px 20px;
   border-radius: 20px;
   font-size: 18px;
@@ -45,7 +45,7 @@ body {
   cursor: pointer;
 }
 
-.nav > .center {
+.nav>.center {
   /* background-color: blue; */
   width: 40%;
   height: 100%;
@@ -54,22 +54,22 @@ body {
   align-items: center;
 }
 
-.nav > .center > ul {
+.nav>.center>ul {
   display: flex;
   padding-left: 20px;
 }
 
-.nav > .center > ul > li {
+.nav>.center>ul>li {
   list-style: none;
   font-size: 23px;
   padding: 20px;
 }
 
-.nav > .center > ul > li > a {
+.nav>.center>ul>li>a {
   text-decoration: none;
 }
 
-.nav > .right {
+.nav>.right {
   height: 100%;
   width: 30%;
   display: flex;
@@ -78,7 +78,7 @@ body {
   gap: 1rem;
 }
 
-.nav > .right > input {
+.nav>.right>input {
   width: 70%;
   height: 50%;
   border-radius: 20px;
@@ -87,7 +87,7 @@ body {
   padding-left: 20px;
 }
 
-.nav > .right > i {
+.nav>.right>i {
   font-size: 30px;
 }
 
@@ -110,17 +110,17 @@ body {
   padding: 2rem 2rem 2rem 5rem;
 }
 
-.first-left > h1 {
+.first-left>h1 {
   font-size: 4.5rem;
   line-height: 4.5rem;
 }
 
-.first-left > p {
+.first-left>p {
   padding-top: 1rem;
   font-size: 22px;
 }
 
-.first-left > button {
+.first-left > button{
   padding: 9px 40px;
   border-radius: 20px;
   font-size: 18px;
@@ -153,6 +153,10 @@ body {
   scale: 1.2;
 }
 
+
+
+/*------------------------------------------- second section here---------------------------------------------- */
+
 .second {
   height: 40vh;
   width: 100vw;
@@ -161,17 +165,18 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
+  
+  }
 
 .collaborate {
   height: 100%;
   width: 100%;
   background-color: rgb(227, 224, 224);
 }
+
 .collaborate .heading {
   height: 20%;
   width: 100%;
-  /* background-color: blue; */
 }
 
 .collaborate .heading h1 {
