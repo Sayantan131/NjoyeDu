@@ -93,7 +93,7 @@ body {
 
 /* first section start here */
 .first {
-  height: calc(100vmaxy - 5.5rem);
+  height: auto;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -127,11 +127,12 @@ body {
 .first-left > button {
   padding: 9px 40px;
   border-radius: 20px;
-  font-size: 18px;
   outline: none;
   border: none;
   background-color: rgb(203, 202, 202);
   cursor: pointer;
+  margin-top: 10px;
+  font-size: 1.5rem;
 }
 
 .first-right {
@@ -168,14 +169,13 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  }
+}
 
 .collaborate {
   height: 100%;
   width: 100%;
   background-color: rgb(227, 224, 224);
-  border-radius: 5rem;
-  
+  border-radius: 8rem 8rem 0 0;
 }
 
 .collaborate .heading {
@@ -187,232 +187,106 @@ body {
   font-size: 3rem;
   margin-top: 2rem;
   text-transform: capitalize;
-  /* color: rgb(86, 86, 239); */
 }
 
 .collaborate .img {
-  height: 70%;
-  width: 100%;
+  height: 20vh;
+  width: 100vw;
   display: flex;
   gap: 10px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 .collaborate .img img {
-  height: 7rem;
-  width: 8.8rem;
+  height: 7em;
+  width: 8.8em;
 }
 
 .collaborate .img img #google {
   width: 8rem;
 }
 
-/* responsive navbar */
-.mobile-navbar-button {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: none;
-}
-
-.mobile-navbar-button > .mobile-nav-icons {
-  font-size: 2rem;
-  color: #212529;
-  padding: 4rem;
-  z-index: 9999;
-}
-
-.mobile-navbar-button > .close {
-  display: none;
-}
-
-@media (max-width: 1200px) {
-  .nav {
-    justify-content: space-between;
-    position: relative;
-  }
-  .nav > .right {
-    display: none;
-  }
-  .nav > .center {
-    width: 100%;
-    height: 100vh;
-    background-color: #a7d8e6;
-    position: absolute;
-    left: 0;
-    top: 0;
-    justify-content: center;
-    transform: translateX(100%);
-    transition: all 0.5s linear;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .nav > .center > ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .active .center {
-    transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-  .active > .mobile-navbar-button > .menu {
-    display: none;
-  }
-
-  .active > .mobile-navbar-button > .close {
-    display: block;
-  }
-
-  .nav > .left {
-    height: 100%;
-    /* width: 40%; */
-  }
-  .mobile-navbar-button {
-    height: 100%;
-    /* width: 20%; */
-  }
-  .mobile-navbar-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  /* ====first section==== */
-  .first {
-    gap: 1rem;
-    height: 50%;
-  }
-
-  .first > .first-left > h1 {
-    font-size: 3rem;
-    line-height: 3rem;
-    padding: 12px;
-  }
-
-  .first > .first-left > p {
-    font-size: 1.5rem;
-    padding: 20px;
-  }
-  .first > .first-left > button {
-    font-size: 1.9rem;
-  }
-}
-
-/* css for scroll bar */
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(transparent, #07e576);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(transparent, #00c6ff);
-}
-
-
-
 /* ----------------------------------  Third section is here ----------------------------------------------------------- */
 
-.section-third{
-height: 70vh;
-width: 100vw;
-background-color: azure;
-/* background-color: pink; */
+.section-third {
+  height: 70vh;
+  width: 100vw;
+  background-color: azure;
+  margin-top: 3rem;
 }
 
-.section-third h2{
+.section-third h2 {
   font-size: 3rem;
-  margin-top: 1rem;
-  /* margin-top: 3rem; */
   text-align: center;
   color: rgb(66, 66, 247);
 }
 
-.section-third .top p{
+.section-third .top p {
   font-size: 1.2rem;
   width: 40rem;
-  /* height: 9rem; */
   margin-bottom: 1rem;
   text-align: center;
   margin: auto;
 }
 
-.section-third .section-third-task{
+.section-third .section-third-task {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  /* margin-top: 3rem; */
   grid-column-gap: 2rem;
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
 }
 
 .section-third .section-third-task .task1,
 .section-third .section-third-task .task2,
 .section-third .section-third-task .task3,
-.section-third .section-third-task .task4{
-
-    padding-top: 2rem;
-    /* background-color: cornsilk; */
-    text-align: center;
-    transition: all 0.3s linear;
-    border-radius: 2rem;
+.section-third .section-third-task .task4 {
+  padding-top: 2rem;
+  text-align: center;
+  transition: all 0.3s linear;
+  border-radius: 2rem;
+  background: #fff;
+  box-shadow: 0rem 0.4rem 2rem rgba(35, 52, 53, 0.25);
+  padding: 2rem;
 }
 
 .section-third .section-third-task .task1 h3,
 .section-third .section-third-task .task2 h3,
 .section-third .section-third-task .task3 h3,
-.section-third .section-third-task .task4 h3{
+.section-third .section-third-task .task4 h3 {
+  font-size: 1.7rem;
+  margin-top: 2rem;
+  padding-bottom: 20px;
+}
 
-    font-size: 1.5rem;
-    text-transform: capitalize;
-    margin-top: 2rem;
-} 
+.section-third .section-third-task .task1 p,
+.section-third .section-third-task .task2 p,
+.section-third .section-third-task .task3 p,
+.section-third .section-third-task .task4 p {
+  font-size: 1.3rem;
+}
+
 .section-third .section-third-task .task1 h3,
-.section-third .section-third-task .task2 h3{
-
+.section-third .section-third-task .task2 h3 {
   margin-top: 1.1rem;
 }
 
 .section-third .section-third-task .task1 img,
 .section-third .section-third-task .task2 img,
 .section-third .section-third-task .task3 img,
-.section-third .section-third-task .task4 img{
-
-    width: 10rem;
-    height: 10rem;
-    transition: all 0.3s;
+.section-third .section-third-task .task4 img {
+  width: 6rem;
+  height: 6rem;
+  transition: all 0.3s;
 }
 
-.section-third .section-third-task .task1 img,
-.section-third .section-third-task .task2 img{
-
-    height: 11rem;
-}
-
-
-.section-third .section-third-task .task1:hover,
-.section-third .section-third-task .task2:hover,
-.section-third .section-third-task .task3:hover,
-.section-third .section-third-task .task4:hover{                                  
-  background: #fff;
-  box-shadow: 0rem 0.4rem 2rem rgba(35,52,53,0.25);
-}
-
-.section-third .section-third-task .task1:hover> img,
-.section-third .section-third-task .task2:hover> img,
-.section-third .section-third-task .task3:hover> img,
-.section-third .section-third-task .task4:hover> img{
-    transform: rotate(360deg);
+.section-third .section-third-task .task1:hover > img,
+.section-third .section-third-task .task2:hover > img,
+.section-third .section-third-task .task3:hover > img,
+.section-third .section-third-task .task4:hover > img {
+  transform: rotate(360deg);
 }
 
 /* ---------------------------------fourth section is here-------------------------------------------- */
