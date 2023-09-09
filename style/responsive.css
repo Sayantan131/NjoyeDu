@@ -93,6 +93,11 @@
     font-size: 1.3rem;
   }
   /* ======third section======= */
+
+  .section-third{
+    height: 120vh;
+    width: 100vw;
+  }
   .section-third .section-third-task {
     grid-column-gap: 1rem;
     grid-template-columns: 1fr 1fr;
@@ -129,6 +134,19 @@
   .section-third .section-third-task .task4 p {
     font-size: 1.5rem;
   }
+
+  /* ------fouth section----- */
+  .fourth-card{
+    height: 15rem;
+    width: 11rem;
+   background-color: pink;
+  }
+
+  .fourth-card >img{
+    height: 12rem;
+    width: 10rem;
+  }
+
 }
 
 @media (max-width: 900px) {

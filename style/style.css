@@ -216,6 +216,7 @@ body {
   width: 100vw;
   background-color: azure;
   margin-top: 3rem;
+  background-color: black;
 }
 
 .section-third h2 {
@@ -291,8 +292,13 @@ body {
 
 /* ---------------------------------fourth section is here-------------------------------------------- */
 .fourth-categories{
-  height: 70vh;
+  height: 80vh;
   width: 100vw;
+  /* background-color: red; */
+}
+.fourthSection-div{
+  height: 100%;
+  width: 100%;
   /* background-color: red; */
 }
 .categories-header{
@@ -309,7 +315,6 @@ body {
   gap: 2rem;
   flex-wrap: wrap;
   padding: 15px;
-  /* background-color: black; */
 }
 
 .fourth-card{
@@ -319,7 +324,7 @@ body {
  padding-top: 10px;
 }
 
-.fourth-card >img{
+.fourth-card> a >img{
   height: 14rem;
   width: 12rem;
 }
