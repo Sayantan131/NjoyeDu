@@ -216,6 +216,7 @@ body {
   width: 100vw;
   background-color: azure;
   margin-top: 3rem;
+  background-color: black;
 }
 
 .section-third h2 {
@@ -290,3 +291,44 @@ body {
 }
 
 /* ---------------------------------fourth section is here-------------------------------------------- */
+.fourth-categories{
+  height: 80vh;
+  width: 100vw;
+  /* background-color: red; */
+}
+.fourthSection-div{
+  height: 100%;
+  width: 100%;
+  /* background-color: red; */
+}
+.categories-header{
+ font-size: 2vmax;
+ padding-top: 2rem;
+ padding-left: 3rem;
+}
+.fourth-wrapper{
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+.fourth-card{
+ height: 18rem;
+ width: 14rem;
+ /* background: green; */
+ padding-top: 10px;
+}
+
+.fourth-card> a >img{
+  height: 14rem;
+  width: 12rem;
+}
+
+.fourth-card >h3{
+  font-size: 20px;
+}
