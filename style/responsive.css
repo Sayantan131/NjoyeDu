@@ -178,8 +178,15 @@
   }
 
   /* third section */
+
+  .section-third{
+    height: 250vh;
+    width: 100vw;
+    background-color: black;
+  }
+
   .section-third .section-third-task {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr ;
   }
 }
 
