@@ -321,6 +321,11 @@ body {
  width: 14rem;
  /* background: green; */
  padding-top: 10px;
+ transition: all ease .5s;
+}
+
+.fourth-card:hover{
+  scale: 1.2;
 }
 
 .fourth-card> a >img{

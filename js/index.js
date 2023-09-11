@@ -12,6 +12,7 @@ const words = [
   { text: "Embrace Learning with Joyful Enthusiasm." },
   { text: "Don't wait for opportunity; create it." },
   { text: "Your attitude determines your direction." },
+  { text: "Be the best version of yourself, one day at a time." },
 ];
 
 let currentIndex = 0;
@@ -19,14 +20,8 @@ let currentIndex = 0;
 function displayNextWord() {
   const changeElement = document.querySelector(".change");
 
-  if (currentIndex < words.length) {
-    changeElement.textContent = words[currentIndex].text;
-    currentIndex++;
-  } else {
-    clearInterval(intervalId);
-  }
+  changeElement.textContent = words[currentIndex].text;
+  currentIndex = (currentIndex + 1) % words.length;
 }
 
-displayNextWord();
-
-const intervalId = setInterval(displayNextWord, 3000);
+setInterval(displayNextWord, 3000);
