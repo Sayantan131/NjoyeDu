@@ -1,0 +1,55 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background-color: rgb(182, 182, 254);
+  height: 9vh;
+  width: 100vw;
+}
+
+.logo {
+  width: 20vw;
+  cursor: pointer;
+}
+
+.logo > img {
+  width: 70%;
+}
+
+.headerLinks {
+  width: 40vw;
+  display: flex;
+  justify-content: flex-start;
+
+  align-items: center;
+}
+
+.headerLinks > a {
+  font-size: 20px;
+  padding: 1rem;
+}
+
+.search {
+  width: 30vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.search > input {
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  padding: 5px;
+  width: 70%;
+}
+
+.search > .searchIcon {
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 10px;
+}
