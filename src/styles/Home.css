@@ -1,0 +1,136 @@
+.first {
+  height: auto;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 4rem;
+  margin: 0 1rem 5rem 0;
+  gap: 10rem;
+  border: 1px solid red;
+  overflow-x: hidden;
+}
+
+.first-left {
+  height: 90%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 2rem 2rem 5rem;
+  border: 1px solid blue;
+}
+
+.first-left > h1 {
+  font-size: 4.5rem;
+  line-height: 4.5rem;
+}
+
+.first-left > p {
+  padding-top: 1rem;
+  font-size: 22px;
+}
+
+.first-left > .btn {
+  padding: 9px 20px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  background-color: rgb(37, 37, 232);
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1.5rem;
+  transition: all ease 1s;
+}
+
+.first-left > .btn:hover {
+  background-color: white;
+  color: rgb(37, 37, 232);
+  border: 1px solid rgb(37, 37, 232);
+}
+.wrapper{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+}
+
+.first-right {
+  height: 25rem;
+  width: 25rem;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgb(165, 165, 252);
+  overflow: hidden;
+  border: 15px solid blue;
+  margin-top: 2rem;
+  border: 1px solid green;
+}
+.first-right img {
+  height: 25rem;
+  transition: all ease 1s;
+}
+
+.first-right img:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
+
+/* second section here */
+
+.second {
+  height: 40vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.collaborate {
+  width: 100%;
+  background-color: rgb(190, 185, 185);
+  border-radius: 8rem 8rem 0 0;
+  border: 1px solid red;
+}
+
+.collaborate .heading {
+  height: 20%;
+  width: 100%;
+}
+
+.collaborate .heading h1 {
+  font-size: 3rem;
+  margin-top: 2rem;
+  text-transform: capitalize;
+}
+
+.collaborate .img {
+  height: 20vh;
+  width: 100vw;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.collaborate .img img {
+  height: 7em;
+  width: 8.8em;
+}
+
+.collaborate .img img #google {
+  width: 8rem;
+}

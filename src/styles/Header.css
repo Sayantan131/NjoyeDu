@@ -10,11 +10,12 @@
 .logo {
   width: 20vw;
   cursor: pointer;
+  /* border: 1px solid red; */
 }
 
-.logo > img {
-  width: 70%;
-}
+.logo >img{
+    width: 70%;
+} 
 
 .headerLinks {
   width: 40vw;
@@ -22,6 +23,7 @@
   justify-content: flex-start;
 
   align-items: center;
+  /* border: 1px solid red; */
 }
 
 .headerLinks > a {
@@ -29,27 +31,48 @@
   padding: 1rem;
 }
 
-.search {
-  width: 30vw;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  padding: 10px;
+.logInfo{
+    width: 30%;
+    margin-left: 5px;
+    /* border: 1px solid green; */
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.logInfo > button{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
 }
 
-.search > input {
-  font-size: 20px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  padding: 5px;
-  width: 70%;
+.search{
+    width: 30vw;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
 }
 
-.search > .searchIcon {
-  font-size: 25px;
-  cursor: pointer;
-  margin-left: 10px;
+.search > input{
+font-size: 20px;
+border-radius: 10px;
+border: none;
+outline: none;
+padding: 5px;
+width: 70%;
+
+}
+
+.search > .searchIcon{
+    font-size: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+   
 }
