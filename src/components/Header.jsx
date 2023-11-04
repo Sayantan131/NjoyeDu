@@ -2,7 +2,7 @@ import "../styles/Header.css";
 import ColorModeSwitcher from "../components/ColorModeSwitcher";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import {FaSearch} from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 const Header = () => {
   const handleRedirect = () => {
@@ -41,11 +41,16 @@ const Header = () => {
             </Link>
           );
         })}
+        <div className="logInfo">
+          <button>
+            <Link to="/login">Login</Link>
+          </button>
+          
+        </div>
       </div>
       <div className="search">
-        <input type="search" placeholder="Search"/>
-        <FaSearch className="searchIcon"/>
-
+        <input type="search" placeholder="Search" />
+        <FaSearch className="searchIcon" />
       </div>
       <div className="swicther">
         <ColorModeSwitcher />
