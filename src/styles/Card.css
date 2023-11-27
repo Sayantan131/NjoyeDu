@@ -1,0 +1,27 @@
+.task {
+  height: 25rem;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-around;
+  border-radius: 2rem;
+  background: #fff;
+  box-shadow: 0rem 0.4rem 2rem rgba(35, 52, 53, 0.25);
+  padding: 2rem;
+  transition: all 0.3s linear;
+}
+
+.task > img{
+    width: 9rem;
+    height: 5rem;
+}
+
+.task> h3{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.task > p{
+    font-size: 1.2rem;
+}
