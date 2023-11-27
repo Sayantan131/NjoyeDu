@@ -9,8 +9,6 @@ const ColorModeSwitcher = (props) => {
     <IconButton
       variant="ghost"
       color="current"
-      position={"fixed"}
-      top={"2"}
       right={"4"}
       onClick={toggleColorMode}
       icon={<SwicthIcon />}
