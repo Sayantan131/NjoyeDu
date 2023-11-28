@@ -4,7 +4,6 @@ const words = [
   { text: "Embrace Learning with Joyful Enthusiasm." },
   { text: "Don't wait for opportunity; create it." },
   { text: "Your attitude determines your direction." },
-  { text: "Be the best version of yourself, one day at a time." },
 ];
 
 function WordDisplay() {

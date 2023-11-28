@@ -1,0 +1,72 @@
+.about{
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.about > .image{
+    height: 100%;
+    width: 50%;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.about > .image > img{
+    height: 80%;
+    width: 80%;
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+
+.about > .data{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    padding: 5rem;
+    /* border: 1px solid green; */
+}
+
+.about > .data > h2{
+    color: #082567;
+    font-size: 2.5rem;
+    font-weight: 900;
+    padding: 2rem;
+}
+
+.about > .data > p{
+    font-size: 1.2rem;
+}
+.about > .data > h5{
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.about > .data > button{
+        padding: 5px 15px;
+        background-color: #082567;
+        color: white;
+        border-radius: 5px;
+}

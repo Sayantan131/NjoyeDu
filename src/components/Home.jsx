@@ -9,9 +9,10 @@ import img5 from "../assets/5.png";
 import img6 from "../assets/6.png";
 import img7 from "../assets/7.png";
 
-import lernImg from "../assets/learn.png";
-import timeImg from "../assets/time.png";
-import motivationImg from "../assets/motivation.png";
+// import lernImg from "../assets/learn.png";
+// import timeImg from "../assets/time.png";
+// import motivationImg from "../assets/motivation.png";
+import Card from "./Card";
 
 const Home = () => {
   const imageSources = [img1, img2, img3, img4, img5, img6, img7];
@@ -58,38 +59,27 @@ const Home = () => {
           </p>
         </div>
         <div className="section-third-task">
-          <div className="task1">
-            <img src={lernImg} alt="icon1" />
-            <h3>Learn & Improve</h3>
-            <p>
-              Engaging in continuous learning and self-improvement is essential
-              for personal and professional growth
-            </p>
-          </div>
-          <div className="task2">
-            <img src={timeImg} alt="icon2" />
-            <h3>Time saving</h3>
-            <p>
-              Using modern technology can lead to significant time-saving in
-              various tasks and activities.
-            </p>
-          </div>
-          <div className="task3">
-            <img src={motivationImg} alt="icon3" />
-            <h3>Stay Motivated</h3>
-            <p>
-              Practicing positive self-talk and setting achievable goals can
-              help you stay motivated and focused on your aspirations
-            </p>
-          </div>
-          <div className="task4">
-            <img src={img4} alt="icon3" />
-            <h3>Connections</h3>
-            <p>
-              Cultivating meaningful connections with others enriches our lives
-              and opens doors to new opportunities
-            </p>
-          </div>
+          <Card
+            imgUrl={img1}
+            title="Learn & Improve"
+            description=" Engaging in continuous learning and self-improvement is essential
+            for personal and professional growth"
+          />
+          <Card  imgUrl={img2}
+          title="Time saving"
+          description="Using modern technology can lead to significant time-saving in
+          various tasks and activities."
+          />
+          <Card  imgUrl={img3}
+          title="Stay Motivated"
+          description="Practicing positive self-talk and setting achievable goals can help
+          you stay motivated and focused on your aspirations."
+          />
+          <Card  imgUrl={img4}
+          title="Connections"
+          description="Cultivating meaningful connections with others enriches our lives
+          and opens doors to new opportunities."
+          />
         </div>
       </section>
     </>
