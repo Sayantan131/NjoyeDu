@@ -39,13 +39,13 @@
   cursor: pointer;
   margin-top: 10px;
   font-size: 1.5rem;
+  border: 1px solid rgb(37, 37, 232);
   transition: all ease 1s;
 }
 
 .first-left > .btn:hover {
   background-color: white;
   color: rgb(37, 37, 232);
-  border: 1px solid rgb(37, 37, 232);
 }
 
 .first-right {
@@ -87,7 +87,6 @@
   width: 100%;
   background-color: rgb(190, 185, 185);
   border-radius: 8rem 8rem 0 0;
-  border: 1px solid red;
 }
 
 .collaborate .heading {
@@ -136,7 +135,7 @@
   padding: 1rem;
 }
 
-.section-third > .top{
+.section-third > .top {
   margin-bottom: 2rem;
 }
 

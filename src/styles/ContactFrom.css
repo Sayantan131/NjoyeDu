@@ -1,0 +1,48 @@
+.fromContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.fromContainer > label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.5rem;
+}
+
+.fromContainer > input {
+  border: 1px solid gray;
+
+}
+
+.fromContainer > .gender{
+    margin: 1rem;
+}
+.fromContainer > .gender > label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.fromContainer > .gender > input{
+    cursor: pointer;
+}
+
+.fromContainer > button {
+  margin-top: 1rem;
+  padding: 0.2rem 0.5rem;
+  background-color: #00416a;
+  color: white;
+  font-size: 1.4rem;
+  border-radius: 10px;
+  border: 1px solid #00416a;
+}
+
+.fromContainer > button:hover {
+  color: #00416a;
+  background-color: white;
+}
