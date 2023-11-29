@@ -62,13 +62,14 @@
   margin-top: 2rem;
 }
 .first-right img {
-  height: 25rem;
+  height: 100%;
+  width: 100%;
   transition: all ease 1s;
 }
 
 .first-right img:hover {
   cursor: pointer;
-  scale: 1.2;
+  /* scale: 1.2; */
 }
 
 /* second section here */

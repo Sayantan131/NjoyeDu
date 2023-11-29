@@ -9,17 +9,22 @@
 
 .fromContainer > label {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   padding: 0.5rem;
 }
 
 .fromContainer > input {
-  border: 1px solid gray;
-
+  width: 14rem;
+  border: 1px solid #00416a;
+  border-radius: 10px;
+  padding: 0.2rem;
+  outline: none;
+  font-size: 1.2rem;
+  font-weight: 400;
 }
 
-.fromContainer > .gender{
-    margin: 1rem;
+.fromContainer > .gender {
+  margin: 1rem;
 }
 .fromContainer > .gender > label {
   font-size: 1.5rem;
@@ -28,8 +33,8 @@
   cursor: pointer;
 }
 
-.fromContainer > .gender > input{
-    cursor: pointer;
+.fromContainer > .gender > input {
+  cursor: pointer;
 }
 
 .fromContainer > button {
