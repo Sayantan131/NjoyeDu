@@ -1,5 +1,7 @@
 import "../styles/Contact.css";
 import img1 from "../assets/2.png"
+import img2 from "../assets/5.png"
+import img3 from "../assets/6.png"
 import ContactForm from "./ContactForm";
 // import { useSelector } from 'react-redux';
 
@@ -21,8 +23,8 @@ const Contact = () => {
           <h1>NjoyeDu</h1>
           <div className="detailsimg">
             <img src={img1} alt="" />
-            <img src={img1} alt="" />
-            <img src={img1} alt="" />
+            <img src={img2} alt="" />
+            <img src={img3} alt="" />
             <img src={img1} alt="" />
           </div>
         </div>
