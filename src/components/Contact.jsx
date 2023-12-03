@@ -1,8 +1,12 @@
 import "../styles/Contact.css";
 import img1 from "../assets/2.png"
 import ContactForm from "./ContactForm";
+// import { useSelector } from 'react-redux';
 
 const Contact = () => {
+
+  // const contactDetails = useSelector((state) => state.app);
+
   return (
     <div className="contactContainer">
       <h2>Contact our team for more details</h2>
