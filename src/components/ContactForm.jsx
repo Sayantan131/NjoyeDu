@@ -1,26 +1,11 @@
 import "../styles/ContactFrom.css";
-import { useDispatch } from "react-redux";
-import  contactDetailsSlice  from "../features/ContactDetailsSlice";
+
 
 const ContactForm = () => {
-  const dispatch = useDispatch();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const formData = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      higesteducation: e.target.education.value,
-      interest: e.target.interest.value,
-      gender: e.target.gender.value,
-    };
-
-    dispatch(contactDetailsSlice(formData));
-  };
+  
 
   return (
-    <form className="fromContainer" onSubmit={handleSubmit}>
+    <form className="fromContainer" >
       <label htmlFor="name">Name:</label>
       <input type="text" id="name" name="name" required autoComplete="off" />
 
