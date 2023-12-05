@@ -1,14 +1,10 @@
 import "../styles/Contact.css";
-import img1 from "../assets/2.png"
-import img2 from "../assets/5.png"
-import img3 from "../assets/6.png"
+import img1 from "../assets/2.png";
+import img2 from "../assets/5.png";
+import img3 from "../assets/6.png";
 import ContactForm from "./ContactForm";
-// import { useSelector } from 'react-redux';
 
 const Contact = () => {
-
-  // const contactDetails = useSelector((state) => state.app);
-
   return (
     <div className="contactContainer">
       <h2>Contact our team for more details</h2>
@@ -22,15 +18,15 @@ const Contact = () => {
           <h5>join millions of business on stripe.</h5>
           <h1>NjoyeDu</h1>
           <div className="detailsimg">
-            <img src={img1} alt="" />
-            <img src={img2} alt="" />
-            <img src={img3} alt="" />
-            <img src={img1} alt="" />
+            <img src={img1} alt="image" />
+            <img src={img2} alt="image" />
+            <img src={img3} alt="image" />
+            <img src={img1} alt="image" />
           </div>
         </div>
       </div>
       <div className="formContainer">
-            <ContactForm />
+        <ContactForm />
       </div>
     </div>
   );

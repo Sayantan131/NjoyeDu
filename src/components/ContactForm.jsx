@@ -2,7 +2,7 @@ import "../styles/ContactFrom.css";
 
 const ContactForm = () => {
   const handleSubmit = async (e) => {
-    e.preventdefault();
+    e.preventDefault();
 
     const formData = new FormData(e.target);
     const formDataObject = {};
