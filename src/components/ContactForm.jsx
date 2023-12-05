@@ -1,11 +1,36 @@
 import "../styles/ContactFrom.css";
 
-
 const ContactForm = () => {
-  
+  const handleSubmit = async (e) => {
+    e.preventdefault();
+
+    const formData = new FormData(e.target);
+    const formDataObject = {};
+    formData.forEach((value, key) => {
+      formDataObject[key] = value;
+    });
+
+    try {
+      const response = await fetch("http://localhost:8000/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formDataObject),
+      });
+
+      if (response.ok) {
+        console.log("Email sent successfully");
+      } else {
+        console.error("Failed to send email");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+  };
 
   return (
-    <form className="fromContainer" >
+    <form className="fromContainer" onSubmit={handleSubmit}>
       <label htmlFor="name">Name:</label>
       <input type="text" id="name" name="name" required autoComplete="off" />
 
