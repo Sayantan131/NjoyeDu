@@ -2,11 +2,15 @@ import express from "express";
 import nodemailer from "nodemailer";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import process from "process"
-const app = express();
-const port = 8000 || 3001;
+import process from "process";
+import cors from "cors";
+
 dotenv.config();
 
+const app = express();
+const port = process.env.PORT || 3001;
+
+app.use(cors());
 app.use(bodyParser.json());
 
 app.post("/send-email", async (req, res) => {
@@ -24,8 +28,8 @@ app.post("/send-email", async (req, res) => {
 
     // Compose the email
     const mailOptions = {
-      from: "your-email@gmail.com",
-      to: "recipient@example.com", // Change this to the recipient's email address
+      from: process.env.EMAIL_USER,
+      to: email,
       subject: "New Contact Form Submission",
       html: `
         <p>Name: ${name}</p>
