@@ -13,7 +13,6 @@ const ContactForm = () => {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleChange = (e) => {
-    console.log("Radio button changed:", e.target.value);
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
