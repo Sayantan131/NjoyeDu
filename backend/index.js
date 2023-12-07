@@ -28,8 +28,8 @@ app.post("/send-email", async (req, res) => {
 
     // Compose the email
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: email,
+      from: email,
+      to: process.env.EMAIL_USER,
       subject: "Contact from form NJOYEDU",
       html: `
         <p>Name: ${name}</p>
