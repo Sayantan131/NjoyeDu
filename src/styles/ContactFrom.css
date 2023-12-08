@@ -12,6 +12,9 @@
   font-weight: 500;
   padding: 0.5rem;
 }
+.fromContainer > label > span {
+  color: red;
+}
 
 .fromContainer > input {
   width: 14rem;
