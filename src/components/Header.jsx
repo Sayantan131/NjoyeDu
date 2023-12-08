@@ -1,5 +1,4 @@
 import "../styles/Header.css";
-import ColorModeSwitcher from "../components/ColorModeSwitcher";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
@@ -51,9 +50,6 @@ const Header = () => {
       <div className="search">
         <input type="search" placeholder="Search" />
         <FaSearch className="searchIcon" />
-      </div>
-      <div className="swicther">
-        <ColorModeSwitcher />
       </div>
     </div>
   );

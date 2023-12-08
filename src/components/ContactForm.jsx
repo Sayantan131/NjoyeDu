@@ -1,5 +1,7 @@
 import { useState } from "react";
-import "../styles/ContactFrom.css";
+import "../styles/ContactFrom.css"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -9,8 +11,6 @@ const ContactForm = () => {
     interest: "",
     gender: "",
   });
-
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,8 +28,12 @@ const ContactForm = () => {
         },
         body: JSON.stringify(formData),
       });
+
       if (response.ok) {
-        setShowSuccessPopup(true);
+        // Email sent successfully
+        toast.success(
+          "Email sent successfully! Our team will contact you as soon as possible."
+        );
         setFormData({
           name: "",
           email: "",
@@ -38,17 +42,20 @@ const ContactForm = () => {
           gender: "",
         });
       } else {
-        console.error("Failed to send email");
+        // Failed to send email
+        toast.error("Failed to send email");
       }
     } catch (error) {
+      // Error sending email
       console.error("Error sending email:", error);
+      toast.error("Error sending email. Please try again later.");
     }
   };
 
   return (
     <div>
       <form className="fromContainer" onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Name<span>*</span>:</label>
         <input
           type="text"
           id="name"
@@ -59,7 +66,7 @@ const ContactForm = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email">Email<span>*</span>:</label>
         <input
           type="email"
           id="email"
@@ -71,7 +78,7 @@ const ContactForm = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="education">Highest Education:</label>
+        <label htmlFor="education">Highest Education<span>*</span>:</label>
         <input
           type="text"
           id="education"
@@ -82,7 +89,7 @@ const ContactForm = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="interest">Interest Field:</label>
+        <label htmlFor="interest">Interest Field<span>*</span>:</label>
         <input
           type="text"
           id="interest"
@@ -94,9 +101,9 @@ const ContactForm = () => {
         />
 
         <div className="gender">
-          <label>Gender:</label>
+          <label>Gender<span>*</span>:</label>
           <input
-            value="male "
+            value="male"
             id="male"
             name="gender"
             type="radio"
@@ -129,14 +136,7 @@ const ContactForm = () => {
 
         <button type="submit">Submit</button>
       </form>
-      {showSuccessPopup && (
-        <div className="success-popup">
-          <p>
-            Email sent successfully! Our team will contact you as soon as
-            possible.
-          </p>
-        </div>
-      )}
+      <ToastContainer />
     </div>
   );
 };
