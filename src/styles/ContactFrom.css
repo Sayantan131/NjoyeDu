@@ -35,6 +35,9 @@
   padding: 0.5rem;
   cursor: pointer;
 }
+.fromContainer > .gender > label > span {
+  color: red;
+}
 
 .fromContainer > .gender > input {
   cursor: pointer;
