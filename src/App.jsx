@@ -4,6 +4,7 @@ import Home from "./components/Home"
 import About from "./components/About"
 import Contact from "./components/Contact"
 import LoginForm from "./components/Login"
+import Register from "./components/Register"
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <Route exact path="/" element={<Home />} />
       <Route exact path="/about" element={<About />} />
       <Route exact path="/contact" element={<Contact />} />
+      <Route exact path="/register" element={<Register />} />
       <Route exact path="/login" element={<LoginForm />} />
       </Routes>
     </Router>
