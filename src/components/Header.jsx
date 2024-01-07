@@ -42,6 +42,9 @@ const Header = () => {
         })}
         <div className="logInfo">
           <button>
+            <Link to="/register">Register</Link>
+          </button>
+          <button>
             <Link to="/login">Login</Link>
           </button>
           
