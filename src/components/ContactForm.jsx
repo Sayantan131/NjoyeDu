@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/ContactFrom.css"
+import "../styles/ContactFrom.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,13 +21,16 @@ const ContactForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://localhost:8000/api/v1/contact/send-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         // Email sent successfully
@@ -55,7 +58,9 @@ const ContactForm = () => {
   return (
     <div>
       <form className="fromContainer" onSubmit={handleSubmit}>
-        <label htmlFor="name">Name<span>*</span>:</label>
+        <label htmlFor="name">
+          Name<span>*</span>:
+        </label>
         <input
           type="text"
           id="name"
@@ -66,7 +71,9 @@ const ContactForm = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="email">Email<span>*</span>:</label>
+        <label htmlFor="email">
+          Email<span>*</span>:
+        </label>
         <input
           type="email"
           id="email"
@@ -78,7 +85,9 @@ const ContactForm = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="education">Highest Education<span>*</span>:</label>
+        <label htmlFor="education">
+          Highest Education<span>*</span>:
+        </label>
         <input
           type="text"
           id="education"
@@ -89,7 +98,9 @@ const ContactForm = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="interest">Interest Field<span>*</span>:</label>
+        <label htmlFor="interest">
+          Interest Field<span>*</span>:
+        </label>
         <input
           type="text"
           id="interest"
@@ -101,7 +112,9 @@ const ContactForm = () => {
         />
 
         <div className="gender">
-          <label>Gender<span>*</span>:</label>
+          <label>
+            Gender<span>*</span>:
+          </label>
           <input
             value="male"
             id="male"
