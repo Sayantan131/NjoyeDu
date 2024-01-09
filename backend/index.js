@@ -7,7 +7,7 @@ import cors from "cors";
 
 import contactRoutes from "./routes/contact.routes.js";
 
-dotenv.config();
+dotenv.config({ path: "./.env" });
 
 const app = express();
 const port = process.env.PORT || 3001;
