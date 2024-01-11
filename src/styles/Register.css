@@ -1,43 +1,42 @@
 .register {
+  height: calc(100vh - 9vh);
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
 }
+
 .registerfromcontainer {
-  width: 30%;
-  height: 60%;
-  background-color: rgba(58, 58, 58, 0.26);
+  height: 65vh;
+  width: 30vw;
+  background-color: rgb(165, 165, 165);
   border-radius: 10px;
 }
 
 .registerform {
   display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 1;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .registerform > label {
-  font-size: 1.2rem;
-  padding: 12px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.9rem;
 }
 
 .registerform > input {
-  font-size: 1.3rem;
+  padding: 0.4rem;
+  width: 15rem;
   border-radius: 5px;
-  text-align: flex-start;
-  padding-left: 5px;
+  outline: none;
 }
 
-.registerform > button {
-  margin-top: 1rem;
-  background-color: rgb(50, 50, 246);
-  padding: 5px 10px;
-  color: white;
+.inputPass > input {
+  padding: 5px;
+  width: 15rem;
   border-radius: 5px;
-}
-
-.registerform > button:hover {
-  opacity: 0.7;
 }
