@@ -1,10 +1,34 @@
 import { useState } from "react";
 import "../styles/Register.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [reEnterPassword, setReEnterPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const FromSubmit = (e) => {
+    e.preventDefault();
+
+    if (password !== reEnterPassword) {
+      toast.error("Password is not Macthed");
+    }
+
+    // submit from controller
+
+    setName("");
+    setEmail("");
+    setPassword("");
+    setReEnterPassword("");
+  };
 
   return (
     <div className="register">
@@ -29,25 +53,35 @@ const Register = () => {
           />
 
           <label htmlFor="password">password:</label>
-          <input
-            type="number"
-            required
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="inputPass">
+            <input
+              type={showPassword ? "text" : "password"}
+              required
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          <label htmlFor="email">Re-enter Passsword:</label>
+            <button
+              type="button"
+              className="eye"
+              onClick={handleTogglePassword}
+            >
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
+            </button>
+          </div>
+
+          <label htmlFor="re-enter-password">Re-enter Passsword:</label>
           <input
-            type="number"
+            type="password"
             required
             placeholder="Re-enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={reEnterPassword}
+            onChange={(e) => setReEnterPassword(e.target.value)}
           />
-          <button>Submit</button>
+          <button onClick={FromSubmit}>Submit</button>
         </form>
-        {console.log(name, email, password)}
+        <ToastContainer />
       </div>
     </div>
   );
