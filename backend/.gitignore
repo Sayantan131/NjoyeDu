@@ -1,6 +1,6 @@
 # Node.js
 node_modules/
-*.env
+.env
 .env.config
 # Dependency directories
 jspm_packages/
