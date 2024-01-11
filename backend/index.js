@@ -1,28 +1,20 @@
-import express from "express";
-
-import bodyParser from "body-parser";
+import { app } from "./app.js";
+import connectDB from "./db/index.js";
 import dotenv from "dotenv";
 import process from "process";
-import cors from "cors";
 
-import contactRoutes from "./routes/contact.routes.js";
+dotenv.config({ path: ".env" });
 
-dotenv.config({ path: "./.env" });
-
-const app = express();
-const port = process.env.PORT || 3001;
-
-app.use(cors());
-app.use(express.json());
-app.use(bodyParser.json());
-
-app.get("/", (req, res) => {
-  res.send("API working with /api/v1");
-});
-
-// using contact routes
-app.use("/api/v1/contact", contactRoutes);
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+connectDB()
+  .then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server is running at port ${process.env.PORT}`);
+      app.on("error", (error) => {
+        console.log(error);
+        throw error;
+      });
+    });
+  })
+  .catch((error) => {
+    console.log("Mongodb Connection failed !!! ", error);
+  });
