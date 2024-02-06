@@ -31,8 +31,11 @@ app.get("/", (req, res) => {
 
 // ****** Routing *****
 import contactRoutes from "./routes/contact.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 // using contact routes
 app.use("/api/v1/contact", contactRoutes);
+
+app.use("/api/v1/users",userRoutes)
 
 export { app };
