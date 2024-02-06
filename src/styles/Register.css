@@ -40,3 +40,15 @@
   width: 15rem;
   border-radius: 5px;
 }
+
+.inputPass > button{
+  margin-left: 10px;
+}
+
+.registerform > button{
+  background-color: rgb(182, 182, 254);
+  margin: 15px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
