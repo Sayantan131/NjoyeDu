@@ -30,6 +30,9 @@ const userSchema = new Schema(
       enum: ["male", "female"],
       required: [true, "please enter Gender"],
     },
+    refreshToken: {
+      type: String,
+    },
   },
   {
     timestamps: true,
