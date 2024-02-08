@@ -42,7 +42,10 @@ const newUser = asyncHandler(async (req, res) => {
     password,
     gender,
   });
-  const createdUser = await User.findById(user._id).select("-password -refreshToken");
+  
+  const createdUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
 
   if (!createdUser) {
     throw new ApiError(500, "Something went wrong while registering a user");
@@ -65,33 +68,60 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(404, "User doesnot exists");
   }
 
-    const isPasswordValid = await user.isPasswordCorrect(password);
-    if (!isPasswordValid) {
-      throw new ApiError(401, "Invalid user credentials");
-    }
+  const isPasswordValid = await user.isPasswordCorrect(password);
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Invalid user credentials");
+  }
 
-    const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
-      user._id
-    );
+  const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
+    user._id
+  );
 
-  const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
+  const loggedInUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
 
   const options = {
     httpOnly: true,
-    secure:true,
-  }
+    secure: true,
+  };
 
   return res
-  .status(200)
-  .cookie("accessToken", accessToken, options)
-  .cookie("refreshToken", refreshToken, options)
-  .json(
-    new ApiResponse(
-      200,
-      { user: loggedInUser, accessToken, refreshToken },
-      "User logged in successfully"
-    )
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(
+      new ApiResponse(
+        200,
+        { user: loggedInUser, accessToken, refreshToken },
+        "User logged in successfully"
+      )
+    );
+});
+
+const logoutUser = asyncHandler(async (req, res) => {
+  User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: {
+        refreshToken: undefined,
+      },
+    },
+    {
+      new: true,
+    }
   );
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+  
+  return res
+  .status(200)
+  .clearCookie("accessToken", options)
+  .clearCookie("refreshToken", options)
+  .json(new ApiResponse(200, {}, "User logged out successfully"));
 });
 
 const chnageCurrentPassword = asyncHandler(async (req, res) => {
@@ -113,4 +143,4 @@ const chnageCurrentPassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Password changed successfully"));
 });
 
-export { newUser, loginUser, chnageCurrentPassword };
+export { newUser, loginUser, chnageCurrentPassword,logoutUser };
