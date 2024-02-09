@@ -1,7 +1,9 @@
-import { asyncHandler } from "../utils/asyncHandler.js";
+import jwt from "jsonwebtoken";
+import process from "process";
+import { User } from "../model/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponce.js";
-import { User } from "../model/user.model.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
@@ -42,7 +44,7 @@ const newUser = asyncHandler(async (req, res) => {
     password,
     gender,
   });
-  
+
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
@@ -59,7 +61,7 @@ const newUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email && !password) {
-    throw new ApiError(400, "Username or email is required");
+    throw new ApiError(400, "emial and password is required");
   }
 
   const user = await User.findOne({ email });
@@ -116,12 +118,58 @@ const logoutUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
   };
-  
+
   return res
-  .status(200)
-  .clearCookie("accessToken", options)
-  .clearCookie("refreshToken", options)
-  .json(new ApiResponse(200, {}, "User logged out successfully"));
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(200, {}, "User logged out successfully"));
+});
+
+const refreshAccessToken = asyncHandler(async (req, res) => {
+  const incomingRefreshToken =
+    req.cookies.refreshToken || req.body.refreshAccessToken;
+
+  if (!incomingRefreshToken) {
+    throw new ApiError(401, "Unoauthorized request");
+  }
+
+  try {
+    const decodedToken = jwt.verify(
+      incomingRefreshToken,
+      process.env.REFRESH_TOKEN_SCERETE
+    );
+    const user = await User.findById(decodedToken?._id);
+
+    if (!user) {
+      throw new ApiError(401, "Invalide refresh-token");
+    }
+
+    if (incomingRefreshToken !== user?.refreshToken) {
+      throw new ApiError(401, "Refresh-token is expired or used");
+    }
+
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
+    const { accessToken, newRefreshToken } =
+      await generateAccessAndRefreshTokens(user._id);
+
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", newRefreshToken, options)
+      .json(
+        new ApiResponse(
+          200,
+          { accessToken, refreshToken: newRefreshToken },
+          "Access token refreshed successfully"
+        )
+      );
+  } catch (error) {
+    throw new ApiError(401, error?.message || "Invalid refresh token");
+  }
 });
 
 const chnageCurrentPassword = asyncHandler(async (req, res) => {
@@ -143,4 +191,10 @@ const chnageCurrentPassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Password changed successfully"));
 });
 
-export { newUser, loginUser, chnageCurrentPassword,logoutUser };
+export {
+  chnageCurrentPassword,
+  loginUser,
+  logoutUser,
+  newUser,
+  refreshAccessToken,
+};
