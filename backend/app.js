@@ -1,5 +1,6 @@
-import express from "express";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import express from "express";
 import process from "process";
 
 import cors from "cors";
@@ -24,6 +25,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("API working with /api/v1");
@@ -39,3 +41,4 @@ app.use("/api/v1/contact", contactRoutes);
 app.use("/api/v1/users",userRoutes)
 
 export { app };
+
