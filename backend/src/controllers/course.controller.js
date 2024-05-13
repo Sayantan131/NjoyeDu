@@ -116,7 +116,37 @@ const deleteCourse = asyncHandler(async (req, res) => {
 
 const updateCourse = asyncHandler(async (req, res) => {
   try {
-    const {title,lectures} = req.body;
+    const courseId = req.params.id;
+    const { title, lectures } = req.body;
+
+    const courseToUpdate = await Course.findById(courseId);
+
+    if (!courseToUpdate) {
+      throw new ApiError(404, "Course not found");
+    }
+
+    if (req.files && req.files.video && req.files.video[0]) {
+      const videoLocalPath = req.files.video[0].path;
+      const video = await uploadOnCloudinary(videoLocalPath);
+
+      if (!video.url) {
+        throw new ApiError(400, "Error while uploading video on cloudinary");
+      }
+
+      for (let lecture of lectures) {
+        lecture.videoUrl = video.url;
+      }
+    }
+
+    if (title) courseToUpdate.title = title;
+
+    courseToUpdate.lectures = lectures;
+
+    await courseToUpdate.save();
+
+    return res.json(
+      new ApiResponse(200, "Course updated successfully", courseToUpdate)
+    );
   } catch (error) {
     throw new ApiError(
       500,
@@ -126,4 +156,4 @@ const updateCourse = asyncHandler(async (req, res) => {
   }
 });
 
-export { createCourse, getAllCourses, getCourse, deleteCourse };
+export { createCourse, getAllCourses, getCourse, deleteCourse, updateCourse };
