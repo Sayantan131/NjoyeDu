@@ -1,20 +1,22 @@
 import { Router } from "express";
 import {
-    UpdateUserAvatar,
+  UpdateUserAvatar,
   chageCurrentPassword,
   getCurrentUser,
   loginUser,
+  logoutUser,
   refreshAccessToken,
   registerUser,
   updateAccountDetails,
-} from "../controllers/user.controller";
-import { verifyJWT } from "../middlewares/auth.middlewares";
+} from "../controllers/user.controller.js";
+import { upload } from "../middlewares/multer.middleware.js";
+import { verifyJWT } from "../middlewares/auth.middlewares.js";
 
 const router = Router();
 
 router
   .route("/register")
-  .post(uploas.fields([{ name: "avatar", maxCount: 1 }]), registerUser);
+  .post(upload.fields([{ name: "avatar", maxCount: 1 }]), registerUser);
 
 router.route("/login").post(loginUser);
 
@@ -28,6 +30,8 @@ router.route("/me").get(verifyJWT, getCurrentUser);
 
 router.route("/update-account").post(verifyJWT, updateAccountDetails);
 
-router.route("/update-avatar").patch(verifyJWT, upload.single("avatar"), UpdateUserAvatar);
+router
+  .route("/update-avatar")
+  .patch(verifyJWT, upload.single("avatar"), UpdateUserAvatar);
 
 export default router;
