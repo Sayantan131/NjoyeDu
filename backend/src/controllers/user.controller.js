@@ -1,8 +1,8 @@
-import User from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
-import { ApiResponce } from "../utils/ApiResponce.js";
+import { ApiResponse } from "../utils/ApiResponce.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
-import { AsyncHandler, asyncHandler } from "../utils/AsyncHandler.js";
+import { asyncHandler } from "../utils/AsyncHandler.js";
 
 const generateAccessTokenAndRefreshToken = async (userId) => {
   try {
@@ -33,7 +33,7 @@ const isPasswordStrong = (password) => {
   return hasSpecialChar && hasCapitalLetter && hasNumber && hasMinimumLength;
 };
 
-const registerUser = AsyncHandler(async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
 
@@ -80,8 +80,9 @@ const registerUser = AsyncHandler(async (req, res) => {
       throw new ApiError(500, "Somethong went wrong while registering user");
     }
 
-    return res
-      .json(new ApiResponce(201, "User registered successfully", createdUser));
+    return res.json(
+      new ApiResponse(201, "User registered successfully", createdUser)
+    );
   } catch (error) {
     throw new ApiError(
       500,
@@ -91,7 +92,7 @@ const registerUser = AsyncHandler(async (req, res) => {
   }
 });
 
-const loginUser = AsyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -132,7 +133,7 @@ const loginUser = AsyncHandler(async (req, res) => {
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
       .json(
-        new ApiResponce(200, "User logged in successfully", {
+        new ApiResponse(200, "User logged in successfully", {
           user: loggedInUser,
           accessToken,
           refreshToken,
@@ -147,7 +148,7 @@ const loginUser = AsyncHandler(async (req, res) => {
   }
 });
 
-const logoutUser = AsyncHandler(async (req, res) => {
+const logoutUser = asyncHandler(async (req, res) => {
   try {
     User.findByIdAndUpdate(
       req.user._id,
@@ -171,7 +172,7 @@ const logoutUser = AsyncHandler(async (req, res) => {
       .status(200)
       .clearCookie("accessToken", options)
       .clearCookie("refreshToken", options)
-      .json(new ApiResponce(200, "User logged out successfully"));
+      .json(new ApiResponse(200, "User logged out successfully"));
   } catch (error) {
     throw new ApiError(
       500,
@@ -218,7 +219,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", newRefreshToken, options)
       .json(
-        new ApiResponce(200, "Access Token Refreshed Successfully", {
+        new ApiResponse(200, "Access Token Refreshed Successfully", {
           accessToken,
           refreshToken: newRefreshToken,
         })
@@ -248,7 +249,7 @@ const chageCurrentPassword = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponce(200, "Password changed successfully"));
+    .json(new ApiResponse(200, "Password changed successfully"));
 });
 
 const getCurrentUser = asyncHandler(async (req, res) => {
@@ -256,7 +257,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 
   if (!user) return res.status(400).json(new ApiError(400, "please login"));
 
-  return res.status(200).json(new ApiResponce(200, "User found", { user }));
+  return res.status(200).json(new ApiResponse(200, "User found", { user }));
 });
 
 const UpdateUserAvatar = asyncHandler(async (req, res) => {
@@ -286,7 +287,7 @@ const UpdateUserAvatar = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponce(200, "Avatar updated successfully", { user }));
+    .json(new ApiResponse(200, "Avatar updated successfully", { user }));
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
@@ -320,7 +321,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponce(200, "User details updated successfully", { user }));
+    .json(new ApiResponse(200, "User details updated successfully", { user }));
 });
 
 export {
