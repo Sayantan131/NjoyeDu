@@ -26,7 +26,7 @@ router.route("/refresh-token").post(refreshAccessToken);
 
 router.route("/change-password").post(verifyJWT, chageCurrentPassword);
 
-router.route("/me").get(verifyJWT, getCurrentUser);
+router.route("/current-user").get(verifyJWT, getCurrentUser);
 
 router.route("/update-account").post(verifyJWT, updateAccountDetails);
 
