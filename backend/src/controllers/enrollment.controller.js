@@ -108,6 +108,7 @@ const deleteCourseEnrollment = asyncHandler(async (req, res) => {
   }
 });
 
+
 export {
   courseEnrollment,
   updateEnrollmentProgress,

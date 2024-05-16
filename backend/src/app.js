@@ -27,4 +27,6 @@ app.use("/api/v1/users", userRoutes);
 
 app.use("/api/v1/courses", courseRoutes);
 
+
+
 export { app };
