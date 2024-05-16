@@ -46,6 +46,21 @@ const calculateProgress = (sectionsCompleted, totalSections) => {
   return Math.min(Math.max(progress, 0), 100);
 };
 
+const getEnrollments = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  try {
+    const enrollments = await Enrollment.find({ user: userId })
+      .populate("course")
+      .sort({ enrolledAt: -1 });
+
+    res.json(ApiResponce(200, "Enrollments fetched successfully", enrollments));
+  } catch (error) {
+    res.json(
+      ApiError(500, "Something went wrong while fetching enrollments", error)
+    );
+  }
+});
+
 const updateEnrollmentProgress = asyncHandler(async (req, res) => {
   const { sectionsCompleted, totalSections } = req.body;
   const enrollmentId = req.params.id;
@@ -74,4 +89,28 @@ const updateEnrollmentProgress = asyncHandler(async (req, res) => {
   }
 });
 
-export { courseEnrollment, updateEnrollmentProgress };
+const deleteCourseEnrollment = asyncHandler(async (req, res) => {
+  const enrollmentId = req.params.id;
+  try {
+    const enrollment = await Enrollment.findById(enrollmentId);
+
+    if (!enrollment) {
+      throw new ApiError(404, "Enrollment not found");
+    }
+
+    await enrollment.remove();
+
+    return res.json(ApiResponce(200, "Enrollment deleted successfully"));
+  } catch (error) {
+    res.json(
+      ApiError(500, "Something went wrong while deleting enrollment", error)
+    );
+  }
+});
+
+export {
+  courseEnrollment,
+  updateEnrollmentProgress,
+  deleteCourseEnrollment,
+  getEnrollments,
+};
