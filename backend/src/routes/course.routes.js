@@ -1,13 +1,13 @@
 import { Router } from "express";
 
-import { verifyJWT } from "../middlewares/auth.middlewares";
+import { verifyJWT } from "../middlewares/auth.middlewares.js";
 import {
   createCourse,
   deleteCourse,
   getAllCourses,
   getCourse,
   updateCourse,
-} from "../controllers/course.controller";
+} from "../controllers/course.controller.js";
 
 const router = Router();
 
