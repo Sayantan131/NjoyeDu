@@ -1,20 +1,24 @@
 import { Router } from "express";
+
+import { verifyJWT } from "../middlewares/auth.middlewares.js";
 import {
-  courseEnrollment,
-  deleteCourseEnrollment,
-  getEnrollments,
-  updateEnrollmentProgress,
-} from "../controllers/enrollment.controller";
-import { verifyJWT } from "../middlewares/auth.middlewares";
+  createCourse,
+  deleteCourse,
+  getAllCourses,
+  getCourse,
+  updateCourse,
+} from "../controllers/course.controller.js";
 
 const router = Router();
 
-router.route("/createcourse").post(verifyJWT, courseEnrollment);
+router.route("/createcourse").post(verifyJWT, createCourse);
 
-router.route("/updateprogress/:id").patch(verifyJWT, updateEnrollmentProgress);
+router.route("/get-all-courses").get(verifyJWT, getAllCourses);
 
-router.route("/deleteenrollment/:id").delete(verifyJWT, deleteCourseEnrollment);
+router.route("/getcourse/:id").get(verifyJWT, getCourse);
 
-router.route("/getenrollments/:id").get(verifyJWT, getEnrollments)
+router.route("/delete-course/:id").delete(verifyJWT, deleteCourse);
+
+router.route("/update-course/:id").patch(verifyJWT, updateCourse);
 
 export default router;

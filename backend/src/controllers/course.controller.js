@@ -1,10 +1,10 @@
-import Course from "../models/course.model";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponce";
-import AsyncHandler, { asyncHandler } from "../utils/AsyncHandler";
-import { uploadOnCloudinary } from "../utils/Cloudinary";
+import Course from "../models/course.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponce.js";
+import { asyncHandler } from "../utils/AsyncHandler.js";
+import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 
-const createCourse = AsyncHandler(async (req, res) => {
+const createCourse = asyncHandler(async (req, res) => {
   try {
     const { title, lectures } = req.body;
     if (!title || !lectures) {
@@ -50,7 +50,7 @@ const createCourse = AsyncHandler(async (req, res) => {
   }
 });
 
-const getAllCourses = AsyncHandler(async (req, res) => {
+const getAllCourses = asyncHandler(async (req, res) => {
   try {
     const courses = await Course.find().populate("user", "name email");
 
@@ -70,7 +70,7 @@ const getAllCourses = AsyncHandler(async (req, res) => {
   }
 });
 
-const getCourse = AsyncHandler(async (req, res) => {
+const getCourse = asyncHandler(async (req, res) => {
   try {
     const id = req.params.id;
     const course = await Course.findById(id);
