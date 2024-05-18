@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.routes.js";
-import courseRoutes from "./routes/course.routes.js"
+import courseRoutes from "./routes/course.routes.js";
+import paymentRoutes from "./routes/payment.routes.js";
 
 const app = express();
 
@@ -27,6 +28,6 @@ app.use("/api/v1/users", userRoutes);
 
 app.use("/api/v1/courses", courseRoutes);
 
-
+app.use("/api/v1/payment", paymentRoutes);
 
 export { app };
