@@ -1,14 +1,14 @@
-import { asyncHandler } from "../utils/AsyncHandler";
-import paypal from "../utils/Paypal.config.js";
-import { apiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/AsyncHandler.js";
+import { createOrder, captureOrder } from "../utils/Paypal.config.js";
+import { ApiResponse } from "../utils/ApiResponce.js";
 import { ApiError } from "../utils/ApiError.js";
 import { Payment } from "../models/payment.model.js";
 
 const createPaymentOrder = asyncHandler(async (req, res) => {
   const { courseId, amount } = req.body;
   try {
-    const order = await paypal.createOrder(amount);
-    return apiResponse(200, "Order created successfully", {
+    const order = await createOrder.createOrder(amount);
+    return ApiResponse(200, "Order created successfully", {
       orderId: order.id,
       courseId,
     });
@@ -21,7 +21,7 @@ const capturePaymentOrder = asyncHandler(async (req, res) => {
   const { orderId, courseId } = req.body;
   const userId = req.user.id;
   try {
-    const capture = await paypal.captureOrder(orderId);
+    const capture = await captureOrder.captureOrder(orderId);
 
     const paymentDetails = capture.purchase_units[0].payments.captures[0];
 
@@ -39,7 +39,7 @@ const capturePaymentOrder = asyncHandler(async (req, res) => {
     const payment = new Payment(paymentData);
     await payment.save();
 
-    return apiResponse(200, "Payment captured successfully", payment);
+    return ApiResponse(200, "Payment captured successfully", payment);
   } catch (error) {
     throw new ApiError(
       500,

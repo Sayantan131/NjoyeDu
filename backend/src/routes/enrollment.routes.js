@@ -7,18 +7,19 @@ import {
   updateEnrollmentProgress,
 } from "../controllers/enrollment.controller";
 
-Router.route("/enroll/:id").post(verifyJWT, courseEnrollment);
+const router = Router();
 
-Router.route("/get-enrollments").get(verifyJWT, getEnrollments);
+router.route("/enroll/:id").post(verifyJWT, courseEnrollment);
+
+router.route("/get-enrollments").get(verifyJWT, getEnrollments);
 
 Router.route("/update-enrollments-progress/:id").patch(
   verifyJWT,
   updateEnrollmentProgress
 );
 
-Router.route("/delete-enrollment/:id").delete(
-  verifyJWT,
-  deleteCourseEnrollment
-);
+router
+  .route("/delete-enrollment/:id")
+  .delete(verifyJWT, deleteCourseEnrollment);
 
 export default router;
