@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponce.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
+import jwt from "jsonwebtoken";
 
 const generateAccessTokenAndRefreshToken = async (userId) => {
   try {
@@ -15,10 +16,8 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
 
     return { accessToken, refreshToken };
   } catch (error) {
-    throw new ApiError(
-      500,
-      "Something went wrong while generating accesstoken and refreshtoken"
-    );
+    console.log(error.message);
+    throw new ApiError(500, error.message);
   }
 };
 
@@ -34,10 +33,9 @@ const isPasswordStrong = (password) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
+  const { name, email, password, phone } = req.body;
   try {
-    const { name, email, password, phone } = req.body;
-
-    if (!name || !email || !password || !phone || !avatar) {
+    if (!name || !email || !password || !phone) {
       throw new ApiError(400, "All fields are required");
     }
     const existesUser = await User.findOne({ email });
@@ -73,7 +71,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     const createdUser = await User.findById(user._id).select(
-      "-passwordc-refreshToken"
+      "-password -refreshToken"
     );
 
     if (!createdUser) {
@@ -84,18 +82,13 @@ const registerUser = asyncHandler(async (req, res) => {
       new ApiResponse(201, "User registered successfully", createdUser)
     );
   } catch (error) {
-    throw new ApiError(
-      500,
-      "Something went wrong while registering user",
-      error
-    );
+    throw new ApiError(500, error.message);
   }
 });
 
 const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
-
     if (!email || !password) {
       throw new ApiError(400, "Email and password are required");
     }
@@ -140,11 +133,8 @@ const loginUser = asyncHandler(async (req, res) => {
         })
       );
   } catch (error) {
-    throw new ApiError(
-      500,
-      "Something went wrong while logging in user",
-      error
-    );
+    console.log(error.message);
+    throw new ApiError(500, error.message);
   }
 });
 
@@ -196,7 +186,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       process.env.REFRESH_TOKEN_SCERETE
     );
 
-    const user = await User.findById(decodedToken?.id);
+    const user = await User.findById(decodedToken?._id);
 
     if (!user) {
       throw new ApiError(401, "Invalid Refresh-Token");
@@ -209,6 +199,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     const options = {
       httpOnly: true,
       secure: true,
+      path: "/",
     };
 
     const { accessToken, newRefreshToken } =
@@ -225,6 +216,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         })
       );
   } catch (error) {
+    console.log(error.message);
     throw new ApiError(
       500,
       "Something went wrong while refreshing access token",
@@ -236,20 +228,29 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const chageCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
-  const user = await User.findById(req.user?._id);
+  try {
+    if (!oldPassword || !newPassword) {
+      throw new ApiError(400, "Both old and new passwords are required");
+    }
 
-  const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
+    const user = await User.findById(req.user?._id);
 
-  if (!isPasswordCorrect) {
-    throw new ApiError(401, "Invalid old password");
+    const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
+
+    if (!isPasswordCorrect) {
+      throw new ApiError(401, "Invalid old password");
+    }
+
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: false });
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "Password changed successfully"));
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json(new ApiError(500, error.message));
   }
-
-  user.password = newPassword;
-  await user.save({ validateBeforeSave: false });
-
-  return res
-    .status(200)
-    .json(new ApiResponse(200, "Password changed successfully"));
 });
 
 const getCurrentUser = asyncHandler(async (req, res) => {
@@ -293,35 +294,41 @@ const UpdateUserAvatar = asyncHandler(async (req, res) => {
 const updateAccountDetails = asyncHandler(async (req, res) => {
   const { name, email, phone } = req.body;
 
-  if (req.body === "" || req.body === null || req.body === undefined) {
-    return res
-      .status(400)
-      .json(new ApiError(400, "Please provide data to update"));
-  }
-
-  let updates = {};
-
-  if (name) updates.name = name;
-  if (email) updates.email = email;
-  if (phone) updates.phone = phone;
-
-  const user = await User.findByIdAndUpdate(
-    req.user._id,
-    {
-      $set: updates,
-    },
-    {
-      new: true,
+  try {
+    if (req.body === "" || req.body === null || req.body === undefined) {
+      return res
+        .status(400)
+        .json(new ApiError(400, "Please provide data to update"));
     }
-  );
 
-  if (!user) {
-    return res.status(404).json(new ApiError(400, "User not found"));
+    let updates = {};
+
+    if (name) updates.name = name;
+    if (email) updates.email = email;
+    if (phone) updates.phone = phone;
+
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $set: updates,
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (!user) {
+      return res.status(404).json(new ApiError(400, "User not found"));
+    }
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(200, "User details updated successfully", { user })
+      );
+  } catch (error) {
+    throw new ApiError(500, error.message);
   }
-
-  return res
-    .status(200)
-    .json(new ApiResponse(200, "User details updated successfully", { user }));
 });
 
 export {

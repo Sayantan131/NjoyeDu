@@ -1,5 +1,5 @@
 import paypal from "@paypal/checkout-server-sdk";
-import { asyncHandler } from "./AsyncHandler";
+import { asyncHandler } from "./AsyncHandler.js";
 
 const environment = new paypal.core.SandboxEnvironment(
   process.env.PAYPAL_CLIENT_ID,

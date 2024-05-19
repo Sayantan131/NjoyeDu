@@ -6,8 +6,10 @@ import {
   createPaymentOrder,
 } from "../controllers/payment.controller.js";
 
-Router.route("/create-payment").post(verifyJWT, createPaymentOrder);
+const router = Router();
 
-Router.route("/capture-payment").post(verifyJWT, capturePaymentOrder);
+router.route("/create-payment").post(verifyJWT, createPaymentOrder);
+
+router.route("/capture-payment").post(verifyJWT, capturePaymentOrder);
 
 export default Router;

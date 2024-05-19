@@ -30,8 +30,9 @@ const userSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    refrshToken: {
+    refreshToken: {
       type: String,
+      default: null,
     },
     avatar: {
       type: String,
@@ -59,7 +60,7 @@ userSchema.methods.generateToken = function () {
       email: this.email,
       role: this.role,
     },
-    process.env.ACCESS_TOKEN_SECRET,
+    process.env.ACCESS_TOKEN_SECRETE,
     {
       expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
     }
@@ -71,7 +72,7 @@ userSchema.methods.generateRefreshToken = function () {
     {
       _id: this._id,
     },
-    process.env.REFRESH_TOKEN_SECRET,
+    process.env.REFRESH_TOKEN_SCERETE,
     {
       expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
     }
