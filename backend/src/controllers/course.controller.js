@@ -5,8 +5,8 @@ import { asyncHandler } from "../utils/AsyncHandler.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 
 const createCourse = asyncHandler(async (req, res) => {
+  const { title, lectures } = req.body;
   try {
-    const { title, lectures } = req.body;
     if (!title || !lectures) {
       return res
         .status(400)
@@ -44,8 +44,11 @@ const createCourse = asyncHandler(async (req, res) => {
       new ApiResponse(201, "Course created successfully", course)
     );
   } catch (error) {
-    return res.json(
-      new ApiError(500, "Something went wrong while creating course", error)
+    console.log(error.message);
+    throw new ApiError(
+      500,
+      "Something went wrong while creating course",
+      error.message
     );
   }
 });
