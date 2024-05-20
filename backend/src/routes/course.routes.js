@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { upload } from "../middlewares/multer.middleware.js";
 
 import { verifyJWT } from "../middlewares/auth.middlewares.js";
 import {
@@ -11,7 +12,13 @@ import {
 
 const router = Router();
 
-router.route("/createcourse").post(verifyJWT, createCourse);
+router
+  .route("/createcourse")
+  .post(
+    upload.fields([{ name: "lectures", maxCount: 1 }]),
+    verifyJWT,
+    createCourse
+  );
 
 router.route("/get-all-courses").get(verifyJWT, getAllCourses);
 
