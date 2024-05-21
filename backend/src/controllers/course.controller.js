@@ -5,40 +5,51 @@ import { asyncHandler } from "../utils/AsyncHandler.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 
 const createCourse = asyncHandler(async (req, res) => {
-  const { title, lectures } = req.body;
+  const { title, price, lectures } = req.body;
+  const lectureVideos = req.files.lectureVideos;
+  console.log(req.body);
+
+  console.log("req.files.lectureVideos:", req.files.lectureVideos);
   try {
-    if (!title || !lectures) {
+    if (!title || !lectures || !price || !lectureVideos) {
+      throw new ApiError(400, "All fields are required");
+    }
+
+    if (lectures.length !== lectureVideos.length) {
       return res
         .status(400)
-        .json({ message: "Please provide title and lectures" });
+        .json({ message: "Each lecture should have a video" });
     }
 
-    const videoLocalPath = req.files?.lectures[0].path;
+    const lecturesWithVideos = await Promise.all(
+      lectures.map(async (lecture, index) => {
+        const videoLocalPath = lectureVideos[index].path;
 
-    if (!videoLocalPath) {
-      return res.status(400).json({ message: "Video file is required" });
-    }
+        if (!videoLocalPath) {
+          throw new Error("Video file is required");
+        }
 
-    const video = await uploadOnCloudinary(videoLocalPath);
+        const video = await uploadOnCloudinary(videoLocalPath);
 
-    if (!video.url) {
-      return res
-        .status(400)
-        .json({ message: "Error while uploading video on cloudinary" });
-    }
+        if (!video.url) {
+          throw new Error("Error while uploading video on cloudinary");
+        }
+
+        return {
+          ...lecture,
+          videoUrl: video.url,
+        };
+      })
+    );
 
     const course = new Course({
       title,
-      lectures: [
-        {
-          title: lectures[0].title,
-          description: lectures[0].description,
-          videoUrl: video.url,
-          content: lectures[0].content,
-        },
-      ],
+      price,
+      lectures: lecturesWithVideos,
       user: req.user._id,
     });
+
+    await course.save();
 
     return res.json(
       new ApiResponse(201, "Course created successfully", course)
@@ -55,14 +66,14 @@ const createCourse = asyncHandler(async (req, res) => {
 
 const getAllCourses = asyncHandler(async (req, res) => {
   try {
-    const courses = await Course.find().populate("user", "name email");
+    const courses = await Course.find();
 
     if (!courses) {
       throw new ApiError(404, "No courses found");
     }
 
     return res.json(
-      new ApiResponse(200, "Courses fetched successfully", courses)
+      new ApiResponse(200, "Courses fetched successfully", { courses })
     );
   } catch (error) {
     throw new ApiError(

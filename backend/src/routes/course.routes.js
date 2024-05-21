@@ -14,11 +14,7 @@ const router = Router();
 
 router
   .route("/createcourse")
-  .post(
-    upload.fields([{ name: "lectures", maxCount: 1 }]),
-    verifyJWT,
-    createCourse
-  );
+  .post(upload.array("lectureVideos"), verifyJWT, createCourse);
 
 router.route("/get-all-courses").get(verifyJWT, getAllCourses);
 
