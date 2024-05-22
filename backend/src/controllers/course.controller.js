@@ -5,11 +5,10 @@ import { asyncHandler } from "../utils/AsyncHandler.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 
 const createCourse = asyncHandler(async (req, res) => {
-  const { title, price, lectures } = req.body;
-  const lectureVideos = req.files.lectureVideos;
-  console.log(req.body);
+  const { title, price } = req.body;
+  const lectureVideos = req.files;
+  const lectures = await JSON.parse(req.body.lectures);
 
-  console.log("req.files.lectureVideos:", req.files.lectureVideos);
   try {
     if (!title || !lectures || !price || !lectureVideos) {
       throw new ApiError(400, "All fields are required");
@@ -116,9 +115,7 @@ const deleteCourse = asyncHandler(async (req, res) => {
       throw new ApiError(404, "Course not found");
     }
 
-    return res.json(
-      new ApiResponse(200, "Course deleted successfully", course)
-    );
+    return res.json(new ApiResponse(200, "Course deleted successfully"));
   } catch (error) {
     throw new ApiError(
       500,
@@ -131,7 +128,7 @@ const deleteCourse = asyncHandler(async (req, res) => {
 const updateCourse = asyncHandler(async (req, res) => {
   try {
     const courseId = req.params.id;
-    const { title, lectures } = req.body;
+    const { title, lectures, price } = req.body;
 
     const courseToUpdate = await Course.findById(courseId);
 
@@ -139,27 +136,37 @@ const updateCourse = asyncHandler(async (req, res) => {
       throw new ApiError(404, "Course not found");
     }
 
-    if (req.files && req.files.video && req.files.video[0]) {
-      const videoLocalPath = req.files.video[0].path;
-      const video = await uploadOnCloudinary(videoLocalPath);
+    if (lectures) {
+      if (req.files && req.files.video) {
+        if (lectures.length !== req.files.video.length) {
+          throw new ApiError(400, "Each lecture should have a video");
+        }
 
-      if (!video.url) {
-        throw new ApiError(400, "Error while uploading video on cloudinary");
+        for (let i = 0; i < lectures.length; i++) {
+          const videoLocalPath = req.files.video[i].path;
+          const video = await uploadOnCloudinary(videoLocalPath);
+
+          if (!video.url) {
+            throw new ApiError(
+              400,
+              "Error while uploading video on cloudinary"
+            );
+          }
+
+          lectures[i].videoUrl = video.url;
+        }
       }
 
-      for (let lecture of lectures) {
-        lecture.videoUrl = video.url;
-      }
+      courseToUpdate.lectures = lectures;
     }
 
     if (title) courseToUpdate.title = title;
+    if (price) courseToUpdate.price = price;
 
-    courseToUpdate.lectures = lectures;
-
-    await courseToUpdate.save();
+    const updatedcourse = await courseToUpdate.save();
 
     return res.json(
-      new ApiResponse(200, "Course updated successfully", courseToUpdate)
+      new ApiResponse(200, "Course updated successfully", updatedcourse)
     );
   } catch (error) {
     throw new ApiError(

@@ -20,8 +20,8 @@ router.route("/get-all-courses").get(verifyJWT, getAllCourses);
 
 router.route("/getcourse/:id").get(verifyJWT, getCourse);
 
-router.route("/delete-course/:id").delete(verifyJWT, deleteCourse);
-
 router.route("/update-course/:id").patch(verifyJWT, updateCourse);
+
+router.route("/delete-course/:id").delete(verifyJWT, deleteCourse);
 
 export default router;
