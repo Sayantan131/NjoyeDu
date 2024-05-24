@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { verifyJWT } from "../middlewares/auth.middlewares";
+import { verifyJWT } from "../middlewares/auth.middlewares.js";
 import {
   courseEnrollment,
+  updateEnrollmentProgress,
   deleteCourseEnrollment,
   getEnrollments,
-  updateEnrollmentProgress,
-} from "../controllers/enrollment.controller";
+} from "../controllers/enrollment.controller.js";
 
 const router = Router();
 
@@ -13,10 +13,9 @@ router.route("/enroll/:id").post(verifyJWT, courseEnrollment);
 
 router.route("/get-enrollments").get(verifyJWT, getEnrollments);
 
-Router.route("/update-enrollments-progress/:id").patch(
-  verifyJWT,
-  updateEnrollmentProgress
-);
+router
+  .route("/update-enrollments-progress/:id")
+  .patch(verifyJWT, updateEnrollmentProgress);
 
 router
   .route("/delete-enrollment/:id")
