@@ -5,12 +5,12 @@ import { ApiError } from "../utils/ApiError.js";
 import { Payment } from "../models/payment.model.js";
 
 const createPaymentOrder = asyncHandler(async (req, res) => {
-  const { courseId, amount } = req.body;
+  const { enrollId, amount } = req.body;
   try {
     const order = await createOrder.createOrder(amount);
-    return ApiResponse(200, "Order created successfully", {
+    return ApiResponse(201, "Order created successfully", {
       orderId: order.id,
-      courseId,
+      enrollId,
     });
   } catch (error) {
     throw new ApiError(500, "Something went wrong", error.message);
