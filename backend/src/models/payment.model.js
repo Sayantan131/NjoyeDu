@@ -1,14 +1,14 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const PaymentSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
-  courseId: {
+  enrollId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Course',
+    ref: "Enrollment",
     required: true,
   },
   orderId: {
@@ -37,5 +37,4 @@ const PaymentSchema = new mongoose.Schema({
   },
 });
 
-export const Payment = mongoose.model('Payment', PaymentSchema);
-
+export const Payment = mongoose.model("Payment", PaymentSchema);

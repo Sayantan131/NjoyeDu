@@ -45,7 +45,6 @@ const createCourse = asyncHandler(async (req, res) => {
       title,
       price,
       lectures: lecturesWithVideos,
-      user: req.user._id,
     });
 
     await course.save();
