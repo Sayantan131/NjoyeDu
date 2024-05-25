@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.routes.js";
 import courseRoutes from "./routes/course.routes.js";
@@ -20,6 +21,7 @@ app.use(
     extended: true,
   })
 );
+app.use(morgan("dev"));
 
 app.use(express.static("public"));
 app.use(cookieParser());
