@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import "./register.css";
 
 const Register = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
   const [user, setUser] = useState({
     avatar: "",
     username: "",
@@ -73,10 +73,11 @@ const Register = () => {
             "Content-Type": "multipart/form-data",
           },
         }
+        
       );
 
       if (res.data.success) {
-        navigate("/login");
+        history.push("/login");
       }
     } catch (error) {
       toast.error(error.message);

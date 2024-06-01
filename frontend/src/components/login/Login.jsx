@@ -3,23 +3,23 @@ import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
-    loginFailure,
-    loginStart,
-    loginSuccess,
+  loginFailure,
+  loginStart,
+  loginSuccess,
 } from "../../features/authSlice";
 import {
-    getUserFailure,
-    getUserStart,
-    userSuccess,
+  getUserFailure,
+  getUserStart,
+  userSuccess,
 } from "../../features/userSlice";
 import { setAuth } from "../../persist/authPersist.js";
 import "./login.css";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const [inputType, setInputType] = useState("password");
   const [user, setUser] = useState({
@@ -45,7 +45,7 @@ const Login = () => {
           withCredentials: true,
         }
       );
-
+      console.log(res);
       const userData = res.data;
 
       dispatch(
@@ -65,23 +65,24 @@ const Login = () => {
       });
       toast.success("Login successful");
       setTimeout(() => {
-        navigate("/");
+        history.push("/");
       });
     } catch (error) {
-      if (error.response.status === 404) {
+      console.log(error);
+      if (error.response.statusCode === 404) {
         toast.error("User doesnot exists");
         setTimeout(() => {
-          navigate("/register");
+          history.push("/register");
         }, 1000);
-      } else if (error.response.status === 401) {
+      } else if (error.response.statusCode === 401) {
         toast.error("Invalid Credentials");
-      } else if (error.response.status === 400) {
+      } else if (error.response.statusCode === 400) {
         toast.error("Username or email is required");
       } else {
         toast.error(error.message);
       }
       setTimeout(() => {
-        navigate("/register");
+        history.push("/register");
       }, 1000);
       dispatch(loginFailure(error.message));
       dispatch(getUserFailure(error.message));
