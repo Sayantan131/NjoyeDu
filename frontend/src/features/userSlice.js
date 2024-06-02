@@ -7,21 +7,21 @@ const initialState = {
   error: null,
 };
 
-export const getCurrentUser = createAsyncThunk(
-  "user/getCurrentUser",
-  async () => {
-    const accessToken = localStorage.getItem("accessToken");
-    const response = await axios.get(
-      "http://localhost:5000/api/v1/users/current-user",
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    return response.data;
-  }
-);
+// export const getCurrentUser = createAsyncThunk(
+//   "user/getCurrentUser",
+//   async () => {
+//     const accessToken = localStorage.getItem("accessToken");
+//     const response = await axios.get(
+//       "http://localhost:5000/api/v1/users/current-user",
+//       {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       }
+//     );
+//     return response.data;
+//   }
+// );
 
 export const userSlice = createSlice({
   name: "user",
@@ -52,16 +52,16 @@ export const userSlice = createSlice({
       state.error = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(getCurrentUser.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.loading = false;
-    });
-    builder.addCase(getCurrentUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-  },
+  // extraReducers: (builder) => {
+  //   builder.addCase(getCurrentUser.fulfilled, (state, action) => {
+  //     state.user = action.payload;
+  //     state.loading = false;
+  //   });
+  //   builder.addCase(getCurrentUser.rejected, (state, action) => {
+  //     state.loading = false;
+  //     state.error = action.payload;
+  //   });
+  // },
 });
 
 export const {
