@@ -45,7 +45,7 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(res);
+
       const userData = res.data;
 
       dispatch(
@@ -69,23 +69,23 @@ const Login = () => {
       });
     } catch (error) {
       console.log(error);
-      if (error.response.statusCode === 404) {
+      if (error?.response.status === 404) {
         toast.error("User doesnot exists");
         setTimeout(() => {
           history.push("/register");
         }, 1000);
-      } else if (error.response.statusCode === 401) {
+      } else if (error?.response.status === 401) {
         toast.error("Invalid Credentials");
-      } else if (error.response.statusCode === 400) {
+      } else if (error?.response.status === 400) {
         toast.error("Username or email is required");
       } else {
-        toast.error(error.message);
+        toast.error(error?.message);
       }
       setTimeout(() => {
         history.push("/register");
       }, 1000);
-      dispatch(loginFailure(error.message));
-      dispatch(getUserFailure(error.message));
+      dispatch(loginFailure(error));
+      dispatch(getUserFailure(error));
     }
   };
 
